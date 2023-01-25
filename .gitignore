@@ -2,3 +2,4 @@
 *Dataset
 *.zip
 *.pth
+*.checkpoint
