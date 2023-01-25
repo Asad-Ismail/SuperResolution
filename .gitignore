@@ -3,3 +3,5 @@
 *.zip
 *.pth
 *.checkpoint
+*.pyc
+*experiments/
