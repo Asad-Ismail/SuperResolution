@@ -17,7 +17,7 @@
             "name": "vegHQ",
             "mode": "HR", // whether need LR img
             "dataroot": "dataset/veg-dataset_16_128",
-            "datatype": "img", //lmdb or img, path of img files
+            "datatype": "lmdb", //lmdb or img, path of img files
             "l_resolution": 16, // low resolution need to super_resolution
             "r_resolution": 128, // high resolution
             "batch_size": 20,
@@ -29,7 +29,7 @@
             "name": "vegHQ",
             "mode": "LRHR",
             "dataroot": "dataset/veg-dataset_16_128",
-            "datatype": "img", //lmdb or img, path of img files
+            "datatype": "lmdb", //lmdb or img, path of img files
             "l_resolution": 16,
             "r_resolution": 128,
             "data_len": 50 // data length in validation 

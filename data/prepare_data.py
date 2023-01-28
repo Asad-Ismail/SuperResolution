@@ -17,7 +17,7 @@ import time
 def resize_and_convert(img, size, resample):
     if(img.size[0] != size):
         img = trans_fn.resize(img, size, resample)
-        #img = trans_fn.center_crop(img, size)
+        img = trans_fn.center_crop(img, size)
     return img
 
 
