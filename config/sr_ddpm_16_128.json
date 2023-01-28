@@ -8,8 +8,8 @@
         "log": "logs",
         "tb_logger": "tb_logger",
         "results": "results",
-        "checkpoint": "checkpoint"
-        //"resume_state": "/home/ec2-user/SageMaker/SuperResolution/checkpoint/I640000_E37"
+        "checkpoint": "checkpoint",
+        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_ffhq_230126_133353/checkpoint/I50000_E27"
 
         // "resume_state": "experiments/sr_ffhq_210806_204158/checkpoint/I640000_E37" //pretrain model or training state
     },
@@ -21,7 +21,7 @@
             "datatype": "lmdb", //lmdb or img, path of img files
             "l_resolution": 16,
             "r_resolution": 128,
-            "batch_size": 24,
+            "batch_size": 16,
             "num_workers": 8,
             "use_shuffle": true,
             "data_len": -1
@@ -93,6 +93,6 @@
         }
     },
     "wandb": {
-        "project": "CelebaHQ-sr3"
+        "project": "CelebaHQ-ddpm"
     }
 }

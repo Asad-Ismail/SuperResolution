@@ -17,7 +17,7 @@ import time
 def resize_and_convert(img, size, resample):
     if(img.size[0] != size):
         img = trans_fn.resize(img, size, resample)
-        img = trans_fn.center_crop(img, size)
+        #img = trans_fn.center_crop(img, size)
     return img
 
 
@@ -160,8 +160,8 @@ def prepare(img_path, out_path, n_worker, sizes=(16, 128), resample=Image.BICUBI
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path', '-p', type=str,default='./Dataset/celeba_hq_256')
-    parser.add_argument('--out', '-o', type=str, default='./dataset/celebahq')
+    parser.add_argument('--path', '-p', type=str,default='./Dataset/ssl-dataset')
+    parser.add_argument('--out', '-o', type=str, default='./dataset/veg-dataset')
 
     parser.add_argument('--size', type=str, default='64,512')
     parser.add_argument('--n_worker', type=int, default=3)
