@@ -1,5 +1,7 @@
 *.vscode
 *Dataset
+*dataset/
+*dataset*
 *.zip
 *.pth
 *.checkpoint

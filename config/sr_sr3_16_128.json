@@ -9,28 +9,27 @@
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_ffhq_230126_232601/checkpoint/I570000_E305"
+        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_ffhq_230126_232901/checkpoint/I990000_E85"
         //"resume_state": null
-        // "resume_state": "experiments/sr_ffhq_210806_204158/checkpoint/I640000_E37" //pretrain model or training state
     },
     "datasets": {
         "train": {
             "name": "vegHQ",
             "mode": "HR", // whether need LR img
             "dataroot": "dataset/veg-dataset_16_128",
-            "datatype": "lmdb", //lmdb or img, path of img files
+            "datatype": "img", //lmdb or img, path of img files
             "l_resolution": 16, // low resolution need to super_resolution
             "r_resolution": 128, // high resolution
-            "batch_size": 24,
+            "batch_size": 20,
             "num_workers": 8,
             "use_shuffle": true,
             "data_len": -1 // -1 represents all data used in train
         },
         "val": {
-            "name": "CelebaHQ",
+            "name": "vegHQ",
             "mode": "LRHR",
-            "dataroot": "dataset/celebahq_16_128",
-            "datatype": "lmdb", //lmdb or img, path of img files
+            "dataroot": "dataset/veg-dataset_16_128",
+            "datatype": "img", //lmdb or img, path of img files
             "l_resolution": 16,
             "r_resolution": 128,
             "data_len": 50 // data length in validation 
@@ -80,7 +79,7 @@
         "n_iter": 1000000,
         "val_freq": 1e4,
         "save_checkpoint_freq": 1e4,
-        "print_freq": 200,
+        "print_freq": 20,
         "optimizer": {
             "type": "adam",
             "lr": 1e-4

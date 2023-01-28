@@ -160,7 +160,10 @@ class DDPM(BaseModel):
             #     gen_path), strict=False)
             if self.opt['phase'] == 'train':
                 # optimizer
-                opt = torch.load(opt_path)
-                self.optG.load_state_dict(opt['optimizer'])
-                self.begin_step = opt['iter']
-                self.begin_epoch = opt['epoch']
+                if os.path.exists(opt_path):
+                    opt = torch.load(opt_path)
+                    self.optG.load_state_dict(opt['optimizer'])
+                    self.begin_step = opt['iter']
+                    self.begin_epoch = opt['epoch']
+                else:
+                    logger.info('Optimizer not found loading from scratch optimizer')
