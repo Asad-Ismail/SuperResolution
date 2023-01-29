@@ -29,8 +29,7 @@ if __name__ == "__main__":
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
 
-    Logger.setup_logger(None, opt['path']['log'],
-                        'train', level=logging.INFO, screen=True)
+    Logger.setup_logger(None, opt['path']['log'],'train', level=logging.INFO, screen=True)
     Logger.setup_logger('val', opt['path']['log'], 'val', level=logging.INFO)
     logger = logging.getLogger('base')
     logger.info(Logger.dict2str(opt))
@@ -84,15 +83,12 @@ if __name__ == "__main__":
         else:
             # grid img
             sr_img = Metrics.tensor2img(visuals['SR'])  # uint8
-            Metrics.save_img(
-                sr_img, '{}/{}_{}_sr_process.png'.format(result_path, current_step, idx))
+            Metrics.save_img(sr_img, '{}/{}_{}_sr_process.png'.format(result_path, current_step, idx))
             Metrics.save_img(
                 Metrics.tensor2img(visuals['SR'][-1]), '{}/{}_{}_sr.png'.format(result_path, current_step, idx))
 
-        Metrics.save_img(
-            hr_img, '{}/{}_{}_hr.png'.format(result_path, current_step, idx))
-        Metrics.save_img(
-            fake_img, '{}/{}_{}_inf.png'.format(result_path, current_step, idx))
+        Metrics.save_img(hr_img, '{}/{}_{}_hr.png'.format(result_path, current_step, idx))
+        Metrics.save_img(fake_img, '{}/{}_{}_inf.png'.format(result_path, current_step, idx))
 
         if wandb_logger and opt['log_infer']:
             wandb_logger.log_eval_data(fake_img, Metrics.tensor2img(visuals['SR'][-1]), hr_img)
