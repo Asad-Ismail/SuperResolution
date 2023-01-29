@@ -53,8 +53,7 @@ if __name__ == "__main__":
     diffusion = Model.create_model(opt)
     logger.info('Initial Model Finished')
 
-    diffusion.set_new_noise_schedule(
-        opt['model']['beta_schedule']['val'], schedule_phase='val')
+    diffusion.set_new_noise_schedule(opt['model']['beta_schedule']['val'], schedule_phase='val')
     
     logger.info('Begin Model Inference.')
     current_step = 0
