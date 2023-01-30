@@ -9,6 +9,36 @@ from core.wandb_logger import WandbLogger
 from tensorboardX import SummaryWriter
 import os
 
+
+
+def resize_padding(img,new_h,new_w):
+    old_image_height, old_image_width, channels = img.shape
+    color = (0,0,0)
+    result = np.full((new_h,new_w, channels), color, dtype=np.uint8)
+    x_center = (new_w - old_image_width) // 2
+    y_center = (new_h - old_image_height) // 2
+    # copy img image into center of result image
+    result[y_center:y_center+old_image_height, x_center:x_center+old_image_width] = img
+    return result
+
+def save_padded(corrected_imgs,labels=None):
+    maxh=-1
+    maxw=-1
+    for correct_img in(corrected_imgs):
+        h,w,_=correct_img.shape
+        maxh=max(maxh,h)
+        maxw=max(maxw,w)
+    concat_img=None
+    for i, correct_img in enumerate(corrected_imgs):
+        if concat_img is None:
+            correct_img = resize_padding(correct_img,maxh,maxw)
+            #correct_img = cv2.resize(correct_img, (maxw,maxh), interpolation = cv2.INTER_AREA)
+            concat_img=correct_img
+        else:
+            correct_img = resize_padding(correct_img,maxh,maxw)
+            concat_img=np.concatenate([concat_img, correct_img], axis=1)
+    return concat_img
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config', type=str, default='config/sr_sr3_16_128.json',
