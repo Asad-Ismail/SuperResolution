@@ -21,7 +21,7 @@ def resize_padding(img,new_h,new_w):
     result[y_center:y_center+old_image_height, x_center:x_center+old_image_width] = img
     return result
 
-def save_padded(imgs):
+def get_padded(imgs):
     maxh=-1
     maxw=-1
     for img in imgs:
