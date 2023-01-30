@@ -21,22 +21,22 @@ def resize_padding(img,new_h,new_w):
     result[y_center:y_center+old_image_height, x_center:x_center+old_image_width] = img
     return result
 
-def save_padded(corrected_imgs,labels=None):
+def save_padded(imgs):
     maxh=-1
     maxw=-1
-    for correct_img in(corrected_imgs):
-        h,w,_=correct_img.shape
+    for img in imgs:
+        h,w,_=img.shape
         maxh=max(maxh,h)
         maxw=max(maxw,w)
     concat_img=None
-    for i, correct_img in enumerate(corrected_imgs):
+    for i, img in enumerate(imgs):
         if concat_img is None:
-            correct_img = resize_padding(correct_img,maxh,maxw)
+            img = resize_padding(img,maxh,maxw)
             #correct_img = cv2.resize(correct_img, (maxw,maxh), interpolation = cv2.INTER_AREA)
-            concat_img=correct_img
+            concat_img=img
         else:
-            correct_img = resize_padding(correct_img,maxh,maxw)
-            concat_img=np.concatenate([concat_img, correct_img], axis=1)
+            img = resize_padding(img,maxh,maxw)
+            concat_img=np.concatenate([concat_img, img], axis=1)
     return concat_img
 
 if __name__ == "__main__":
