@@ -9,7 +9,7 @@
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_sr3_230129_105533/checkpoint/I90000_E6"
+        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_sr3_230129_105533/checkpoint/I660000_E38"
         //"resume_state": null
     },
     "datasets": {

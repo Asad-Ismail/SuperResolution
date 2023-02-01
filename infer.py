@@ -8,6 +8,8 @@ import core.metrics as Metrics
 from core.wandb_logger import WandbLogger
 from tensorboardX import SummaryWriter
 import os
+import cv2
+import numpy as np
 
 
 
@@ -96,12 +98,14 @@ if __name__ == "__main__":
         idx += 1
         diffusion.feed_data(val_data)
         diffusion.test(continous=True)
-        visuals = diffusion.get_current_visuals(need_LR=False)
+        visuals = diffusion.get_current_visuals(need_LR=True)
 
         hr_img = Metrics.tensor2img(visuals['HR'])  # uint8
         fake_img = Metrics.tensor2img(visuals['INF'])  # uint8
+        lr_img = Metrics.tensor2img(visuals['LR'])
+        #print(f"Dict keys are {visuals.keys()}")
 
-        sr_img_mode = 'grid'
+        sr_img_mode = 'concat'
         if sr_img_mode == 'single':
             # single img series
             sr_img = visuals['SR']  # uint8
@@ -109,19 +113,21 @@ if __name__ == "__main__":
             for iter in range(0, sample_num):
                 Metrics.save_img(
                     Metrics.tensor2img(sr_img[iter]), '{}/{}_{}_sr_{}.png'.format(result_path, current_step, idx, iter))
-        else:
+        elif sr_img_mode == 'grid':
             # grid img
             sr_img = Metrics.tensor2img(visuals['SR'])  # uint8
             Metrics.save_img(sr_img, '{}/{}_{}_sr_process.png'.format(result_path, current_step, idx))
             Metrics.save_img(
                 Metrics.tensor2img(visuals['SR'][-1]), '{}/{}_{}_sr.png'.format(result_path, current_step, idx))
-
-        Metrics.save_img(hr_img, '{}/{}_{}_hr.png'.format(result_path, current_step, idx))
-        Metrics.save_img(fake_img, '{}/{}_{}_inf.png'.format(result_path, current_step, idx))
-        ## save concated images
-        h,w,_=sr_img.shape
-        cv_upsample=cv2.resize(fake_img, dsize=(w,h),interpolation=cv2.INTER_CUBIC)
-        Metrics.save_img(get_padded([fake_img,cv_upsample,sr_img,hr_img]),f"{result_path}/{idx}_concat.png")
+        else:
+            # concatenation mode
+            #print(f"fake image shape is {lr_img.shape}")
+            logging.info(f"Saving images in {result_path}")
+            h,w,_=Metrics.tensor2img(visuals['SR'][-1]).shape
+            cv_upsample=cv2.resize(lr_img, dsize=(w,h),interpolation=cv2.INTER_CUBIC)
+            Metrics.save_img(get_padded([lr_img,cv_upsample,Metrics.tensor2img(visuals['SR'][-1]),hr_img]),f"{result_path}/{idx}_concat.png")
+        #Metrics.save_img(hr_img, '{}/{}_{}_hr.png'.format(result_path, current_step, idx))
+        #Metrics.save_img(fake_img, '{}/{}_{}_inf.png'.format(result_path, current_step, idx))
 
         if wandb_logger and opt['log_infer']:
             wandb_logger.log_eval_data(fake_img, Metrics.tensor2img(visuals['SR'][-1]), hr_img)
