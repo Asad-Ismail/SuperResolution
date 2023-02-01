@@ -119,8 +119,9 @@ if __name__ == "__main__":
         Metrics.save_img(hr_img, '{}/{}_{}_hr.png'.format(result_path, current_step, idx))
         Metrics.save_img(fake_img, '{}/{}_{}_inf.png'.format(result_path, current_step, idx))
         ## save concated images
-        
-        Metrics.save_img(get_padded([fake_img,sr_img,hr_img]),f"{result_path}/{idx}_concat.png")
+        h,w,_=sr_img.shape
+        cv_upsample=cv2.resize(fake_img, dsize=(w,h),interpolation=cv2.INTER_CUBIC)
+        Metrics.save_img(get_padded([fake_img,cv_upsample,sr_img,hr_img]),f"{result_path}/{idx}_concat.png")
 
         if wandb_logger and opt['log_infer']:
             wandb_logger.log_eval_data(fake_img, Metrics.tensor2img(visuals['SR'][-1]), hr_img)
