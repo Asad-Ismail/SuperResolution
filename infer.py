@@ -96,6 +96,12 @@ if __name__ == "__main__":
     os.makedirs(result_path, exist_ok=True)
     for _,  val_data in enumerate(val_loader):
         idx += 1
+        #print(f"Val loader keys are {val_data.keys()}")
+
+        #Metrics.save_img(Metrics.tensor2img(val_data['HR']),f"{result_path}/{idx}_inp.png")
+        if idx not in [6526,18909,22113,38736,66136,113078,113082,125148,129344,131898,132614]:
+            continue
+
         diffusion.feed_data(val_data)
         diffusion.test(continous=True)
         visuals = diffusion.get_current_visuals(need_LR=True)
