@@ -1,72 +1,33 @@
 # Image Super-Resolution via Iterative Refinement
 
-[Paper](https://arxiv.org/pdf/2104.07636.pdf ) |  [Project](https://iterative-refinement.github.io/ )
+** Based on these original Work**
+[Paper](https://arxiv.org/pdf/2104.07636.pdf ) |[Project](https://iterative-refinement.github.io/ )
 
-## Brief
+## Summary
 
-This is an unofficial implementation of **Image Super-Resolution via Iterative Refinement(SR3)** by **PyTorch**.
+Trained on Veg Dataset of Blocky Peppers, Hot Peppers and Cucumbers. Trained on 150,000 fruits of these categories
 
-There are some implementation details that may vary from the paper's description, which may be different from the actual `SR3` structure due to details missing. Specifically, we:
 
-- Used the ResNet block and channel concatenation style like vanilla `DDPM`.
-- Used the attention mechanism in low-resolution features ( $16 \times 16$ ) like vanilla `DDPM`.
-- Encode the $\gamma$ as `FilM` structure did in `WaveGrad`, and embed it without affine transformation.
-- Define the posterior variance as $\dfrac{1-\gamma_{t-1}}{1-\gamma_{t}} \beta_t$  rather than $\beta_t$,  which gives similar results to the vanilla paper.
-
-**If you just want to upscale $(64 \times 64)\text{px} \rightarrow (512 \times 512)\text{px}$ images using the pre-trained model, check out [this google colab script](https://colab.research.google.com/drive/1G1txPI1GKueKH0cSi_DgQFKwfyJOXlhY?usp=sharing).**
-
-## Status
-
-**★★★ NEW: The follow-up [Palette-Image-to-Image-Diffusion-Models](https://arxiv.org/abs/2111.05826) is now available; See the details [here](https://github.com/Janspiry/Palette-Image-to-Image-Diffusion-Models) ★★★**
-
-### Conditional Generation (with Super Resolution)
-
-- [x] 16×16 -> 128×128 on FFHQ-CelebaHQ
-- [x] 64×64 -> 512×512 on FFHQ-CelebaHQ
-
-### Unconditional Generation
-
-- [x] 128×128 face generation on FFHQ
-- [ ] ~~1024×1024 face generation by a cascade of 3 models~~
-
-### Training Step
-
-- [x] log / logger
-- [x] metrics evaluation
-- [x] multi-gpu support
-- [x] resume training / pretrained model
-- [x] validate alone script
-- [x] [Weights and Biases Logging](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement/pull/44) 🌟 NEW
 
 
 
 ## Results
 
-*Note:*  We set the maximum reverse steps budget to $2000$. We limited the model parameters in `Nvidia 1080Ti`, **image noise** and **hue deviation** occasionally appear in high-resolution images, resulting in low scores.  There is a lot of room for optimization.  **We are welcome to any contributions for more extensive experiments and code enhancements.**
-
-| Tasks/Metrics        | SSIM(+) | PSNR(+) | FID(-)  | IS(+)   |
-| -------------------- | ----------- | -------- | ---- | ---- |
-| 16×16 -> 128×128 | 0.675       | 23.26    | - | - |
-| 64×64 -> 512×512     | 0.445 | 19.87 | - | - |
-| 128×128 | - | - | | |
-| 1024×1024 | - | - |      |      |
-
-- #### 16×16 -> 128×128 on FFHQ-CelebaHQ [[More Results](https://drive.google.com/drive/folders/1Vk1lpHzbDf03nME5fV9a-lWzSh3kMK14?usp=sharing)]
-
-| <img src="./misc/sr_process_16_128_0.png" alt="show" style="zoom:90%;" /> |  <img src="./misc/sr_process_16_128_1.png" alt="show" style="zoom:90%;" />    |   <img src="./misc/sr_process_16_128_2.png" alt="show" style="zoom:90%;" />   |
-| ------------------------------------------------------------ | ---- | ---- |
-
-- #### 64×64 -> 512×512 on FFHQ-CelebaHQ [[More Results](https://drive.google.com/drive/folders/1yp_4xChPSZUeVIgxbZM-e3ZSsSgnaR9Z?usp=sharing)]
-
-| <img src="./misc/sr_64_512_0_inf.png" alt="show" style="zoom:90%;" /> | <img src="./misc/sr_64_512_0_sr.png" alt="show" style="zoom:90%;" /> | <img src="./misc/sr_64_512_0_hr.png" alt="show" style="zoom:90%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src="./misc/sr_64_512_1_sr.png" alt="show" style="zoom:90%;" /> | <img src="./misc/sr_64_512_2_sr.png" alt="show" style="zoom:90%;" /> | <img src="./misc/sr_64_512_3_sr.png" alt="show" style="zoom:90%;" /> |
-
-- #### 128×128 face generation on FFHQ [[More Results](https://drive.google.com/drive/folders/13AsjRwDw4wMmL0bK7wPd2rP7ds7eyAMh?usp=sharing)]
-
-| <img src="./misc/sample_process_128_0.png" alt="show" style="zoom:90%;" /> |  <img src="./misc/sample_process_128_1.png" alt="show" style="zoom:90%;" />    |   <img src="./misc/sample_process_128_2.png" alt="show" style="zoom:90%;" />   |
-| ------------------------------------------------------------ | ---- | ---- |
-
+<p align="center">
+  <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="Dark" src="vis_imgs/6526_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="Dark" src="vis_imgs/6526_concat.png" width="25%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/6526_concat.png" width="25%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="Dark" src="vis_imgs/6526_concat.png" width="25%">
+</p>
 
 
 ## Usage

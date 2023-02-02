@@ -1,5 +1,5 @@
 {
-    "name": "sr_ffhq",
+    "name": "sr_ddpm",
     "phase": "train",
     "gpu_ids": [
         0
@@ -9,31 +9,32 @@
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_ffhq_230126_133353/checkpoint/I50000_E27"
+        //"resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_ffhq_230126_133353/checkpoint/I50000_E27"
+        "resume_state": "/home/ec2-user/SageMaker/SuperResolution/experiments/sr_ffhq_230126_232601/checkpoint/I600000_E321"
 
         // "resume_state": "experiments/sr_ffhq_210806_204158/checkpoint/I640000_E37" //pretrain model or training state
     },
     "datasets": {
         "train": {
-            "name": "CelebaHQ",
+            "name": "vegHQ",
             "mode": "HR",
-            "dataroot": "dataset/celebahq_16_128",
-            "datatype": "lmdb", //lmdb or img, path of img files
+            "dataroot": "dataset/veg-dataset_16_128",
+            "datatype": "img", //lmdb or img, path of img files
             "l_resolution": 16,
             "r_resolution": 128,
-            "batch_size": 16,
+            "batch_size": 20,
             "num_workers": 8,
             "use_shuffle": true,
             "data_len": -1
         },
         "val": {
-            "name": "CelebaHQ",
+            "name": "vegHQ",
             "mode": "LRHR",
-            "dataroot": "dataset/celebahq_16_128",
-            "datatype": "lmdb", //lmdb or img, path of img files
+            "dataroot": "dataset/veg-dataset_16_128",
+            "datatype": "img", //lmdb or img, path of img files
             "l_resolution": 16,
             "r_resolution": 128,
-            "data_len": 3
+            "data_len": 5
         }
     },
     "model": {
@@ -93,6 +94,6 @@
         }
     },
     "wandb": {
-        "project": "CelebaHQ-ddpm"
+        "project": "veg-ddpm"
     }
 }
