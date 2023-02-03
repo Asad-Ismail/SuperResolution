@@ -1,28 +1,28 @@
-# Image Super-Resolution via Iterative Refinement
+# Image Super-Resolutio for Vegetables via Iterative Refinement
 
-**Based on these excellent original Works**
+## **Based on these excellent original Works**
 
-[Paper](https://arxiv.org/pdf/2104.07636.pdf ) |[Project](https://iterative-refinement.github.io/ )
+[Paper](https://arxiv.org/pdf/2104.07636.pdf ) |[Project](https://iterative-refinement.github.io/ )|
 [Code](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement)
+
 Please see original paper and unofficial code repo for more details about the method
 
 ## Summary
 In this work we train the Super resolution SR3 and DDPM models on vegetable dataset ~150000 for vegetable phenotyping
-We also added the support to load pretrained model weights trained on celeb dataset without optimizer to decrease training time
+We also added the support to load pretrained model weights trained on celeb dataset without optimizer to decrease training time.
+
+The model is supervised in Self supervised learning fashion so there are no explicti labels required
 
 
 ## Results
 
-LR Image.   BiCubic Interpolation. SR3 super resoluton.  GT HR
+          LR    BiCubic   SR3    GT HR
 
 <p align="center">
   <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
 </p>
 <p align="center">
   <img alt="Light" src="vis_imgs/18909_concat.png" width="75%">
-</p>
-<p align="center">
-  <img alt="Light" src="vis_imgs/22113_concat.png" width="75%">
 </p>
 <p align="center">
   <img alt="Light" src="vis_imgs/38736_concat.png" width="75%">
@@ -33,6 +33,14 @@ LR Image.   BiCubic Interpolation. SR3 super resoluton.  GT HR
 <p align="center">
   <img alt="Light" src="vis_imgs/113078_concat.png" width="75%">
 </p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/131898_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/132614_concat.png" width="75%">
+</p>
+
+
 
 
 
@@ -105,3 +113,8 @@ python eval.py -p [result root]
 # run the script
 python infer.py -c [config file]
 ```
+
+
+## Acknowledgments:
+
+See Original work **https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement** 
