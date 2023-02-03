@@ -1,14 +1,12 @@
 # Image Super-Resolution via Iterative Refinement
 
-** Based on these original Work**
+**Based on these excellent original Works**
+
 [Paper](https://arxiv.org/pdf/2104.07636.pdf ) |[Project](https://iterative-refinement.github.io/ )
 
 ## Summary
-
-Trained on Veg Dataset of Blocky Peppers, Hot Peppers and Cucumbers. Trained on 150,000 fruits of these categories
-
-
-
+In this work we train the Super resolution SR3 and DDPM models on vegetable dataset ~150000 for vegetable phenotyping
+We also added the support to load pretrained model weights trained on celeb dataset without optimizer to decrease training time
 
 
 ## Results
@@ -44,11 +42,7 @@ pip install -r requirement.txt
 
 This paper is based on "Denoising Diffusion Probabilistic Models", and we build both DDPM/SR3 network structures, which use timesteps/gamma as model embedding inputs, respectively. In our experiments, the SR3 model can achieve better visual results with the same reverse steps and learning rate. You can select the JSON files with annotated suffix names to train the different models.
 
-| Tasks                             | Platform（Code：qwer)                                        | 
-| --------------------------------- | ------------------------------------------------------------ |
-| 16×16 -> 128×128 on FFHQ-CelebaHQ | [Google Drive](https://drive.google.com/drive/folders/12jh0K8XoM1FqpeByXvugHHAF3oAZ8KRu?usp=sharing)\|[Baidu Yun](https://pan.baidu.com/s/1OzsGZA2Vmq1ZL_VydTbVTQ) |  
-| 64×64 -> 512×512 on FFHQ-CelebaHQ | [Google Drive](https://drive.google.com/drive/folders/1mCiWhFqHyjt5zE4IdA41fjFwCYdqDzSF?usp=sharing)\|[Baidu Yun](https://pan.baidu.com/s/1orzFmVDxMmlXQa2Ty9zY3g) |   
-| 128×128 face generation on FFHQ   | [Google Drive](https://drive.google.com/drive/folders/1ldukMgLKAxE7qiKdFJlu-qubGlnW-982?usp=sharing)\|[Baidu Yun](https://pan.baidu.com/s/1Vsd08P1A-48OGmnRV0E7Fg ) | 
+
 
 ```python
 # Download the pretrained model and edit [sr|sample]_[ddpm|sr3]_[resolution option].json about "resume_state":
@@ -60,9 +54,6 @@ This paper is based on "Denoising Diffusion Probabilistic Models", and we build 
 #### New Start
 
 If you didn't have the data, you can prepare it by following steps:
-
-- [FFHQ 128×128](https://github.com/NVlabs/ffhq-dataset) | [FFHQ 512×512](https://www.kaggle.com/arnaud58/flickrfaceshq-dataset-ffhq)
-- [CelebaHQ 256×256](https://www.kaggle.com/badasstechie/celebahq-resized-256x256) | [CelebaMask-HQ 1024×1024](https://drive.google.com/file/d/1badu11NqxGf6qM3PTTooQDJvQbejgbTv/view)
 
 Download the dataset and prepare it in **LMDB** or **PNG** format using script.
 
@@ -76,47 +67,13 @@ then you need to change the datasets config to your data path and image resoluti
 ```json
 "datasets": {
     "train": {
-        "dataroot": "dataset/ffhq_16_128", // [output root] in prepare.py script
+        "dataroot": "dataset/veg-dataset_16_128", // [output root] in prepare.py script
         "l_resolution": 16, // low resolution need to super_resolution
         "r_resolution": 128, // high resolution
         "datatype": "lmdb", //lmdb or img, path of img files
     },
     "val": {
-        "dataroot": "dataset/celebahq_16_128", // [output root] in prepare.py script
-    }
-},
-```
-
-#### Own Data
-
-You also can use your image data by following steps, and we have some examples in dataset folder.
-
-At first, you should organize the images layout like this, this step can be finished by `data/prepare_data.py` automatically:
-
-```shell
-# set the high/low resolution images, bicubic interpolation images path 
-dataset/celebahq_16_128/
-├── hr_128 # it's same with sr_16_128 directory if you don't have ground-truth images.
-├── lr_16 # vinilla low resolution images
-└── sr_16_128 # images ready to super resolution
-```
-
-```python
-# super resolution from 16 to 128
-python data/prepare_data.py  --path [dataset root]  --out celebahq --size 16,128 -l
-```
-
-*Note: Above script can be used whether you have the vanilla high-resolution images or not.*
-
-then you need to change the dataset config to your data path and image resolution: 
-
-```json
-"datasets": {
-    "train|val": { // train and validation part
-        "dataroot": "dataset/celebahq_16_128",
-        "l_resolution": 16, // low resolution need to super_resolution
-        "r_resolution": 128, // high resolution
-        "datatype": "img", //lmdb or img, path of img files
+        "dataroot": "dataset/veg-dataset_16_128", // [output root] in prepare.py script
     }
 },
 ```
@@ -140,47 +97,7 @@ python eval.py -p [result root]
 ```
 
 ### Inference Alone
-
-Set the  image path like steps in `Own Data`, then run the script:
-
 ```python
 # run the script
 python infer.py -c [config file]
 ```
-
-## Weights and Biases 🎉
-
-The library now supports experiment tracking, model checkpointing and model prediction visualization with [Weights and Biases](https://wandb.ai/site). You will need to [install W&B](https://pypi.org/project/wandb/) and login by using your [access token](https://wandb.ai/authorize). 
-
-```
-pip install wandb
-
-# get your access token from wandb.ai/authorize
-wandb login
-```
-
-W&B logging functionality is added to the `sr.py`, `sample.py` and `infer.py` files. You can pass `-enable_wandb` to start logging.
-
-- `-log_wandb_ckpt`: Pass this argument along with `-enable_wandb` to save model checkpoints as [W&B Artifacts](https://docs.wandb.ai/guides/artifacts). Both `sr.py` and `sample.py` is enabled with model checkpointing. 
-- `-log_eval`: Pass this argument along with `-enable_wandb` to save the evaluation result as interactive [W&B Tables](https://docs.wandb.ai/guides/data-vis). Note that only `sr.py` is enabled with this feature. If you run `sample.py` in eval mode, the generated images will automatically be logged as image media panel. 
-- `-log_infer`: While running `infer.py` pass this argument along with `-enable_wandb` to log the inference results as interactive W&B Tables. 
-
-You can find more on using these features [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement/pull/44). 🚀
-
-
-## Acknowledgements
-
-Our work is based on the following theoretical works:
-
-- [Denoising Diffusion Probabilistic Models](https://arxiv.org/pdf/2006.11239.pdf)
-- [Image Super-Resolution via Iterative Refinement](https://arxiv.org/pdf/2104.07636.pdf)
-- [WaveGrad: Estimating Gradients for Waveform Generation](https://arxiv.org/abs/2009.00713)
-- [Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/abs/1809.11096)
-
-Furthermore, we are benefitting a lot from the following projects:
-
-- https://github.com/bhushan23/BIG-GAN
-- https://github.com/lmnt-com/wavegrad
-- https://github.com/rosinality/denoising-diffusion-pytorch
-- https://github.com/lucidrains/denoising-diffusion-pytorch
-- https://github.com/hejingwenhejingwen/AdaFM
