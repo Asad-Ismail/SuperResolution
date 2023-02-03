@@ -15,19 +15,23 @@ Trained on Veg Dataset of Blocky Peppers, Hot Peppers and Cucumbers. Trained on 
 
 <p align="center">
   <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
-&nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="Dark" src="vis_imgs/6526_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
-&nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="Dark" src="vis_imgs/6526_concat.png" width="25%">
+  <img alt="Light" src="vis_imgs/18909_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/6526_concat.png" width="25%">
-&nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="Dark" src="vis_imgs/6526_concat.png" width="25%">
+  <img alt="Light" src="vis_imgs/22113_concat.png" width="75%">
 </p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/38736_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/66136_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/113078_concat.png" width="75%">
+</p>
+
 
 
 ## Usage
