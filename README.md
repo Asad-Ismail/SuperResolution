@@ -18,7 +18,6 @@ The model is supervised in Self supervised learning fashion so there are no expl
 <p align="center">
   <img alt="Light" src="vis_imgs/labels.png" width="75%">
 </p>
-
 <p align="center">
   <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
 </p>
