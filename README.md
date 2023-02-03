@@ -13,6 +13,8 @@ We also added the support to load pretrained model weights trained on celeb data
 
 ## Results
 
+LR Image.   BiCubic Interpolation. SR3 super resoluton.  GT HR
+
 <p align="center">
   <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
 </p>
