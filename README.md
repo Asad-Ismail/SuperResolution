@@ -15,8 +15,7 @@ The model is supervised in Self supervised learning fashion so there are no expl
 
 
 ## Results
-
-                  **LR**    **BiCubic**   **SR3**    **GT HR**
+                     LR     BiCubic     SR3       GT
 
 <p align="center">
   <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
