@@ -15,34 +15,61 @@ The model is supervised in Self supervised learning fashion so there are no expl
 
 
 ## Results
+
+__Visual Results for SR3 Model__
+
 <p align="center">
-  <img alt="Light" src="vis_imgs/labels.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/labels.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/6526_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/6526_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/18909_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/18909_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/38736_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/38736_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/66136_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/66136_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/113078_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/113078_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/131898_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/131898_concat.png" width="75%">
 </p>
 <p align="center">
-  <img alt="Light" src="vis_imgs/132614_concat.png" width="75%">
+  <img alt="Light" src="vis_imgs/sr3/132614_concat.png" width="75%">
 </p>
 
 
+__Visual Results for DDPM Model__
 
-
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/labels.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/6526_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/18909_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/38736_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/66136_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/113078_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/131898_concat.png" width="75%">
+</p>
+<p align="center">
+  <img alt="Light" src="vis_imgs/ddpm/132614_concat.png" width="75%">
+</p>
 
 ## Usage
 ### Environment
