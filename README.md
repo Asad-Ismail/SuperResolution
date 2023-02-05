@@ -81,6 +81,10 @@ pip install -r requirement.txt
 
 This paper is based on "Denoising Diffusion Probabilistic Models", and we build both DDPM/SR3 network structures, which use timesteps/gamma as model embedding inputs, respectively. In our experiments, the SR3 model can achieve better visual results with the same reverse steps and learning rate. You can select the JSON files with annotated suffix names to train the different models.
 
+You can download pretrained model for veg dataset from 
+[](https://drive.google.com/file/d/1Oq77l5HvfnMVo9sPBUP24nYJEGYufyZy/view?usp=share_link)
+
+
 
 
 ```python
