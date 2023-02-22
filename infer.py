@@ -94,6 +94,7 @@ if __name__ == "__main__":
 
     result_path = '{}'.format(opt['path']['results'])
     os.makedirs(result_path, exist_ok=True)
+    execution_times = []
     for _,  val_data in enumerate(val_loader):
         idx += 1
         #print(f"Val loader keys are {val_data.keys()}")
@@ -103,7 +104,10 @@ if __name__ == "__main__":
             continue
 
         diffusion.feed_data(val_data)
+        start_time = time.monotonic()
         diffusion.test(continous=True)
+        end_time = time.monotonic()
+        execution_times.append(end_time - start_time)
         visuals = diffusion.get_current_visuals(need_LR=True)
 
         hr_img = Metrics.tensor2img(visuals['HR'])  # uint8
@@ -140,3 +144,7 @@ if __name__ == "__main__":
 
     if wandb_logger and opt['log_infer']:
         wandb_logger.log_eval_table(commit=True)
+
+    average_time = sum(execution_times) / len(execution_times)
+    # print the result
+    print("Average execution time:", average_time)
