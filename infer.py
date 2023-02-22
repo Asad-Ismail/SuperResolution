@@ -10,6 +10,8 @@ from tensorboardX import SummaryWriter
 import os
 import cv2
 import numpy as np
+from tqdm import tqdm
+import time
 
 
 
@@ -95,7 +97,7 @@ if __name__ == "__main__":
     result_path = '{}'.format(opt['path']['results'])
     os.makedirs(result_path, exist_ok=True)
     execution_times = []
-    for _,  val_data in enumerate(val_loader):
+    for _,  val_data in tqdm(enumerate(val_loader)):
         idx += 1
         #print(f"Val loader keys are {val_data.keys()}")
 
