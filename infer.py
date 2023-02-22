@@ -112,8 +112,8 @@ if __name__ == "__main__":
         #print(f"Val loader keys are {val_data.keys()}")
 
         #Metrics.save_img(Metrics.tensor2img(val_data['HR']),f"{result_path}/{idx}_inp.png")
-        #if idx not in [6526,18909,22113,38736,66136,113078,113082,125148,129344,131898,132614]:
-        #    continue
+        if idx not in [6526,18909,22113,38736,66136,113078,113082,125148,129344,131898,132614]:
+            continue
 
         diffusion.feed_data(val_data)
         start_time = time.monotonic()
@@ -125,6 +125,13 @@ if __name__ == "__main__":
         hr_img = Metrics.tensor2img(visuals['HR'])  # uint8
         fake_img = Metrics.tensor2img(visuals['INF'])  # uint8
         lr_img = Metrics.tensor2img(visuals['LR'])
+        
+        ##
+        #cv2.imwrite("lr_test.png",lr_img)
+        # convert image to pixelated image
+        lr_img=pixelated_image(lr_img)
+        #cv2.imwrite("pixel_test.png",px_img)
+        #exit()
         #print(f"Dict keys are {visuals.keys()}")
 
         sr_img_mode = 'concat'
