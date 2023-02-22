@@ -43,6 +43,16 @@ def get_padded(imgs):
             concat_img=np.concatenate([concat_img, img], axis=1)
     return concat_img
 
+def pixelated_image(img):
+    pixel_size = 8
+    new_height = img.shape[0] * pixel_size
+    new_width = img.shape[1] * pixel_size
+    new_img = np.zeros((new_height, new_width, 3), np.uint8)
+    for i in range(new_height):
+        for j in range(new_width):
+            new_img[i,j] = img[i//pixel_size,j//pixel_size]
+    return new_img
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config', type=str, default='config/sr_sr3_16_128.json',
@@ -102,8 +112,8 @@ if __name__ == "__main__":
         #print(f"Val loader keys are {val_data.keys()}")
 
         #Metrics.save_img(Metrics.tensor2img(val_data['HR']),f"{result_path}/{idx}_inp.png")
-        if idx not in [6526,18909,22113,38736,66136,113078,113082,125148,129344,131898,132614]:
-            continue
+        #if idx not in [6526,18909,22113,38736,66136,113078,113082,125148,129344,131898,132614]:
+        #    continue
 
         diffusion.feed_data(val_data)
         start_time = time.monotonic()
